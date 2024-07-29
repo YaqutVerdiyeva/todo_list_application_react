@@ -28,14 +28,14 @@ function App() {
 
   return (
     <>
-      <div class="container">
-        <div class="todoapp-section">
-          <h1 class="heading">
+      <div className="container">
+        <div className="todoapp-section">
+          <h1 className="heading">
             <p>Todo App</p>
           </h1>
-          <div class="tasks">
+          <div className="tasks">
             <h2>Tasks</h2>
-            <ul class="tasks-list">
+            <ul className="tasks-list">
               {taskList.length == 0 && "No task :("}
               {taskList.map((el) => {
                 return (
@@ -52,15 +52,15 @@ function App() {
               })}
             </ul>
           </div>
-          <div class="add-todo-section">
+          <div className="add-todo-section">
             <input
-              class="task-input"
+              className="task-input"
               type="text"
               onChange={(e) => setTask(e.target.value)}
               value={task}
               placeholder="Add task"
             />
-            <button onClick={addTask} class="add-btn">
+            <button onClick={addTask} className="add-btn">
               Add
             </button>
           </div>
