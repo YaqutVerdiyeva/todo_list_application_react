@@ -10,9 +10,11 @@ const Todo = ({ todoList, setTodoList }) => {
         return (
           <li key={el.id}>
             {el.todoName}
-            <button onClick={() => deleteTodo(el.id)} className="delete-btn">
+           <div className="buttuons">
+             <button onClick={() => deleteTodo(el.id)} className="delete-btn">
               Delete
             </button>
+           </div>
           </li>
         );
       })}

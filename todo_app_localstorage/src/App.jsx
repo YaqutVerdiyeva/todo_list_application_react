@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./index.css";
 import TodoList from "./components/TodoList";
 function App() {
   const [todo, setTodo] = useState("");
@@ -9,7 +10,6 @@ function App() {
   useEffect(() => {
     localStorage.setItem("todoList", JSON.stringify(todoList));
   }, [todoList]);
-
   function addTodo() {
     if (todo) {
       setTodoList([
@@ -22,6 +22,9 @@ function App() {
     }
     setTodo("");
   }
+  function deleteTodo(id) {
+    return setTodoList(todoList.filter((el) => el.id != id));
+  }
   return (
     <>
       <div className="container">
@@ -29,12 +32,7 @@ function App() {
           <h1 className="heading">
             <p>Todo App</p>
           </h1>
-          <TodoList
-            todo={todo}
-            setTodo={setTodo}
-            todoList={todoList}
-            setTodoList={setTodoList}
-          />
+          <TodoList todoList={todoList} setTodoList={setTodoList} />
           <div className="add-todo-section">
             <input
               className="task-input"
