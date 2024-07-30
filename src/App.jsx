@@ -1,31 +1,27 @@
 import { useEffect, useState } from "react";
-import "./App.css";
-import "./index.css";
+import TodoList from "./components/TodoList";
 function App() {
-  const [task, setTask] = useState("");
-  const [taskList, setTaskList] = useState(
-    JSON.parse(localStorage.getItem("taskList")) || []
+  const [todo, setTodo] = useState("");
+  const [todoList, setTodoList] = useState(
+    JSON.parse(localStorage.getItem("todoList")) || []
   );
-  useEffect(() => {
-    localStorage.setItem("taskList", JSON.stringify(taskList));
-  }, [taskList]);
 
-  function addTask() {
-    if (task) {
-      setTaskList([
-        ...taskList,
+  useEffect(() => {
+    localStorage.setItem("todoList", JSON.stringify(todoList));
+  }, [todoList]);
+
+  function addTodo() {
+    if (todo) {
+      setTodoList([
+        ...todoList,
         {
+          todoName: todo,
           id: new Date(),
-          taskName: task,
         },
       ]);
-      setTask("");
     }
+    setTodo("");
   }
-  function deleteTask(id) {
-    setTaskList(taskList.filter((el) => el.id !== id));
-  }
-
   return (
     <>
       <div className="container">
@@ -33,34 +29,21 @@ function App() {
           <h1 className="heading">
             <p>Todo App</p>
           </h1>
-          <div className="tasks">
-            <h2>Tasks</h2>
-            <ul className="tasks-list">
-              {taskList.length == 0 && "No task :("}
-              {taskList.map((el) => {
-                return (
-                  <li key={el.id}>
-                    {el.taskName}{" "}
-                    <button
-                      className="delete-btn"
-                      onClick={() => deleteTask(el.id)}
-                    >
-                      Delete
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+          <TodoList
+            todo={todo}
+            setTodo={setTodo}
+            todoList={todoList}
+            setTodoList={setTodoList}
+          />
           <div className="add-todo-section">
             <input
               className="task-input"
+              onChange={(e) => setTodo(e.target.value)}
               type="text"
-              onChange={(e) => setTask(e.target.value)}
-              value={task}
+              value={todo}
               placeholder="Add task"
             />
-            <button onClick={addTask} className="add-btn">
+            <button className="add-btn" onClick={addTodo}>
               Add
             </button>
           </div>
